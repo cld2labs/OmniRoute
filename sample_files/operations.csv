@@ -1,0 +1,4 @@
+route_name,origin_name,destination_name,base_price_cents,stops_json,departure_time,arrival_time,capacity_total,seats_available,status,delay_minutes
+Route 1,Los Angeles,San Diego,2500,"[{""stop_order"":1,""stop_name"":""Anaheim"",""scheduled_offset_min"":30},{""stop_order"":2,""stop_name"":""Irvine"",""scheduled_offset_min"":60}]",2026-03-20T08:00:00Z,2026-03-20T11:00:00Z,50,20,scheduled,0
+Route 2,San Francisco,Los Angeles,4000,"[{""stop_order"":1,""stop_name"":""San Jose"",""scheduled_offset_min"":40},{""stop_order"":2,""stop_name"":""Bakersfield"",""scheduled_offset_min"":180}]",2026-03-20T09:00:00Z,2026-03-20T15:00:00Z,60,15,delayed,25
+Route 3,New York,Boston,3000,"[{""stop_order"":1,""stop_name"":""New Haven"",""scheduled_offset_min"":120}]",2026-03-20T07:30:00Z,2026-03-20T11:30:00Z,55,30,scheduled,0

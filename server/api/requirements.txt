@@ -1,0 +1,15 @@
+fastapi==0.115.8
+uvicorn[standard]==0.34.0
+pydantic==2.10.6
+pydantic-settings==2.7.1
+python-multipart==0.0.22
+SQLAlchemy==2.0.38
+pgvector==0.3.6
+asyncpg==0.30.0
+psycopg[binary]==3.2.5
+alembic==1.14.1
+crewai==0.105.0
+openai==2.18.0
+langsmith==0.3.13
+pytest==8.3.5
+sqlparse==0.5.3
