@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/InnovationHub-HeaderImage.png" width="220" alt="OmniRoute">
+  <img src="docs/assets/InnovationHub-HeaderImage.png" width="800" alt="Company Logo">
 </p>
 
 # OmniRoute
@@ -520,20 +520,6 @@ LLM_BASE_URL=https://api.openai.com/v1
 LLM_MODEL=gpt-4o-mini
 ```
 
-### Groq
-
-**Best for**: fast inference through an OpenAI-compatible API
-
-- **Get API Key**: https://console.groq.com/keys
-- **Provider value in OmniRoute**: `openai_compatible`
-- **Change these fields**:
-
-```bash
-LLM_PROVIDER=openai_compatible
-LLM_API_KEY=gsk_...
-LLM_BASE_URL=https://api.groq.com/openai/v1
-LLM_MODEL=your-groq-model
-```
 
 ### Ollama
 
