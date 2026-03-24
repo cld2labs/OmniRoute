@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/InnovationHub-HeaderImage.png" width="220" alt="OmniRoute">
+  <img src="docs/assets/InnovationHub-HeaderImage.png" width="800" alt="Company Logo">
 </p>
 
 # OmniRoute
@@ -7,23 +7,6 @@
 AI-powered multi-agent platform for transportation operations.
 
 ---
-
-## License
-
-This project is licensed under our [LICENSE](./LICENSE.md) file for details.
-
----
-
-## Disclaimer
-
-**FinSights** is provided as-is for analysis and informational purposes. While we strive for accuracy:
-
-- Always verify AI-generated summaries against original documents
-- Do not rely solely on AI summaries for investment decisions
-- Consult financial advisors for investment guidance
-- Test thoroughly before using in production environments
-
-For full disclaimer details, see [DISCLAIMER.md](./DISCLAIMER.md)
 
 ## Table of Contents
 
@@ -520,20 +503,6 @@ LLM_BASE_URL=https://api.openai.com/v1
 LLM_MODEL=gpt-4o-mini
 ```
 
-### Groq
-
-**Best for**: fast inference through an OpenAI-compatible API
-
-- **Get API Key**: https://console.groq.com/keys
-- **Provider value in OmniRoute**: `openai_compatible`
-- **Change these fields**:
-
-```bash
-LLM_PROVIDER=openai_compatible
-LLM_API_KEY=gsk_...
-LLM_BASE_URL=https://api.groq.com/openai/v1
-LLM_MODEL=your-groq-model
-```
 
 ### Ollama
 
@@ -740,3 +709,20 @@ Check:
 - `LLM_API_KEY` and `EMBEDDING_API_KEY` are valid
 
 ---
+
+## License
+
+This project is licensed under our [LICENSE](./LICENSE.md) file for details.
+
+---
+
+## Disclaimer
+
+**OmniRoute** is provided as-is for simulation, analysis, and informational purposes. While we strive for accuracy:
+
+- Always verify AI-generated responses against the underlying operational data
+- Do not rely solely on AI-generated outputs for live transportation decisions
+- Review incident explanations and summaries with human judgment
+- Test thoroughly before using in shared or production-like environments
+
+For full disclaimer details, see [DISCLAIMER.md](./DISCLAIMER.md)

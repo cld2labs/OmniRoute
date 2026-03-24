@@ -1,0 +1,4 @@
+incident_external_id,route_name,incident_type,occurred_at,summary,departure_time,details,proof_url
+INC-2001,Route 2,delay,2026-03-20T10:00:00Z,Traffic congestion on highway,2026-03-20T09:00:00Z,Heavy traffic due to accident,http://example.com/proof1
+INC-2002,Route 1,maintenance,2026-03-19T18:00:00Z,Bus maintenance delay,2026-03-20T08:00:00Z,Engine issue detected,http://example.com/proof2
+INC-2003,Route 3,weather,2026-03-20T06:30:00Z,Snowstorm delay,2026-03-20T07:30:00Z,Heavy snowfall affecting routes,http://example.com/proof3

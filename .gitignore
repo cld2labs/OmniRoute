@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!.env.sample
+!**/.env.example
+!**/.env.sample
+
+# Local instructions and docs
+AGENTS.md
+docs/**/*.md
+
+# Python environments
+.venv/
+venv/
+
+# Frontend dependencies and build output
+client/node_modules/
+client/dist/
+
+# Test and coverage output
+server/api/tests/
+.coverage
+coverage/
+htmlcov/
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/

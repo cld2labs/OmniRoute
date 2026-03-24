@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply m-0 bg-surface-950 font-sans text-zinc-100 antialiased;
+  background-image:
+    radial-gradient(circle at top, rgba(124, 58, 237, 0.18), transparent 28%),
+    linear-gradient(180deg, #05030a 0%, #07040d 42%, #05030a 100%);
+}
+
+* {
+  @apply box-border;
+}
+
+::selection {
+  @apply bg-primary/30 text-white;
+}
+
+a {
+  @apply text-inherit no-underline;
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-spacing {
+    @apply py-20;
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-full border border-primary/60 bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-zinc-100 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .surface-card {
+    @apply rounded-[28px] border border-white/10 bg-white/5 shadow-soft backdrop-blur-xl transition-all duration-300;
+  }
+
+  .panel-grid {
+    @apply relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 34px 34px;
+    background-position: center;
+  }
+
+  .section-label {
+    @apply inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary-100;
+  }
+
+  .input-shell {
+    @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-primary/60 focus:bg-white/10 focus:ring-2 focus:ring-primary/20;
+  }
+
+  .page-title {
+    @apply font-heading text-4xl font-bold tracking-tight text-white md:text-5xl;
+  }
+
+  .page-copy {
+    @apply text-sm leading-7 text-zinc-300 md:text-base;
+  }
+}
+
+@layer utilities {
+  .bg-radial-hero {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.28), transparent 22%),
+      radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.18), transparent 18%),
+      radial-gradient(circle at 70% 65%, rgba(91, 33, 182, 0.2), transparent 28%);
+  }
+}

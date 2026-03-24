@@ -1,0 +1,4 @@
+reservation_external_id,route_name,departure_time,customer_name,email,phone_number,seats_booked,status,amount_paid_cents
+RES-1001,Route 1,2026-03-20T08:00:00Z,Aryan Pandit,aryan@example.com,1234567890,2,confirmed,5000
+RES-1002,Route 2,2026-03-20T09:00:00Z,John Doe,john@example.com,9876543210,1,confirmed,4000
+RES-1003,Route 3,2026-03-20T07:30:00Z,Jane Smith,jane@example.com,5551234567,3,cancelled,9000
