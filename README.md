@@ -8,23 +8,6 @@ AI-powered multi-agent platform for transportation operations.
 
 ---
 
-## License
-
-This project is licensed under our [LICENSE](./LICENSE.md) file for details.
-
----
-
-## Disclaimer
-
-**FinSights** is provided as-is for analysis and informational purposes. While we strive for accuracy:
-
-- Always verify AI-generated summaries against original documents
-- Do not rely solely on AI summaries for investment decisions
-- Consult financial advisors for investment guidance
-- Test thoroughly before using in production environments
-
-For full disclaimer details, see [DISCLAIMER.md](./DISCLAIMER.md)
-
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -726,3 +709,20 @@ Check:
 - `LLM_API_KEY` and `EMBEDDING_API_KEY` are valid
 
 ---
+
+## License
+
+This project is licensed under our [LICENSE](./LICENSE.md) file for details.
+
+---
+
+## Disclaimer
+
+**OmniRoute** is provided as-is for simulation, analysis, and informational purposes. While we strive for accuracy:
+
+- Always verify AI-generated responses against the underlying operational data
+- Do not rely solely on AI-generated outputs for live transportation decisions
+- Review incident explanations and summaries with human judgment
+- Test thoroughly before using in shared or production-like environments
+
+For full disclaimer details, see [DISCLAIMER.md](./DISCLAIMER.md)
