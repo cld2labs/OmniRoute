@@ -611,15 +611,88 @@ docker compose up -d
 | `DATA_ENGINE_DELAY_SENSITIVITY` | Delay propagation sensitivity | `1.0` |
 | `DATA_ENGINE_ENABLE_CASCADING_DELAYS` | Enable cascading delays | `true` |
 
-### Optional Tracing
+### Optional Observability
 
 | Variable | Description | Default |
 |---|---|---|
-| `LANGSMITH_TRACING` | Enable LangSmith tracing | `false` |
-| `LANGSMITH_API_KEY` | LangSmith API key | empty |
-| `LANGSMITH_ENDPOINT` | LangSmith endpoint | `https://api.smith.langchain.com` |
-| `LANGSMITH_PROJECT` | LangSmith project name | `omniroute` |
-| `LANGSMITH_WORKSPACE_ID` | Optional workspace ID | empty |
+| `LANGFUSE_ENABLED` | Enable Langfuse tracing | `false` |
+| `LANGFUSE_PUBLIC_KEY` | Langfuse public key | empty |
+| `LANGFUSE_SECRET_KEY` | Langfuse secret key | empty |
+| `LANGFUSE_HOST` | Langfuse host | `http://localhost:3001` |
+| `LANGFUSE_PROJECT` | Langfuse project name | `omniroute` |
+| `LLM_MAX_CONTEXT_TOKENS` | Context window used for LLM benchmark summaries | `128000` |
+| `EMBEDDING_MAX_CONTEXT_TOKENS` | Context window used for embedding benchmark summaries | `8191` |
+
+### Inference Benchmarks
+
+The table below compares OmniRoute inference performance across local and cloud deployments using the standardized admin query benchmark flow averaged over 3 runs.
+
+| Provider | Model | Embedding Model | Deployment | Context Window | Avg Input Tokens | Avg Output Tokens | Avg Tokens / Request | P50 Latency (ms) | P95 Latency (ms) | Throughput (req/s) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| vLLM | `Qwen/Qwen3-4B-Instruct-2507` | `BAAI/bge-base-en-v1.5` | Local | 32,768 | 740 | 78 | 818 | 13,232 | 56,221 | 0.057 |
+| Cloud LLM | `gpt-4o-mini` | `text-embedding-3-small` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 |
+
+> Notes:
+>
+> - These figures summarize the OmniRoute admin query benchmark flow across 3 benchmark queries.
+> - The local vLLM row reflects a self-hosted LLM plus local embedding model.
+> - The cloud row reflects `gpt-4o-mini` for query generation and `text-embedding-3-small` for incident embeddings.
+> - Token counts and latency can vary slightly across runs depending on prompt expansion, data state, and model behavior.
+
+### Model Capabilities
+
+The current OmniRoute inference options balance local control against managed cloud latency depending on deployment and observability goals.
+
+#### Qwen3-4B-Instruct-2507 + BAAI/bge-base-en-v1.5
+
+This local stack pairs an instruction-tuned Qwen language model with an English BGE embedding model for local inference and incident retrieval.
+
+| Attribute | Details |
+|---|---|
+| LLM | `Qwen/Qwen3-4B-Instruct-2507` |
+| LLM Type | Causal language model |
+| LLM Parameters | 4.0B total, 3.6B non-embedding |
+| LLM Architecture | 36 layers, GQA with 32 Q heads and 8 KV heads |
+| LLM Native Context Length | 262,144 tokens |
+| LLM Inference Mode | Non-thinking mode only |
+| LLM License | Apache 2.0 |
+| Embedding Model | `BAAI/bge-base-en-v1.5` |
+| Embedding Type | English text embedding model |
+| Embedding Dimension | 768 |
+| Embedding Sequence Length | 512 |
+| Embedding Variant | v1.5 with more reasonable similarity distribution |
+| Embedding License | MIT |
+| Deployment | Local via vLLM |
+| Benchmark Context Window | 32,768 |
+
+#### GPT-4o-mini + text-embedding-3-small
+
+This cloud configuration is suitable when you want lower latency and managed API infrastructure while keeping the existing OmniRoute benchmark flow unchanged.
+
+| Attribute | Details |
+|---|---|
+| Model | `gpt-4o-mini` |
+| Embedding Model | `text-embedding-3-small` |
+| Deployment | Cloud API |
+| Benchmark Context Window | 128,000 |
+| Grounded Retrieval Fit | LLM for final grounded responses, OpenAI embeddings for incident narratives |
+| Data Control | Cloud-hosted inference |
+| Weights | Proprietary |
+| Best Fit | Managed deployments, fast iteration, and lower operational overhead |
+
+### Comparison Summary
+
+| OmniRoute Capability | Local vLLM (`Qwen/Qwen3-4B-Instruct-2507`) | Cloud API (`gpt-4o-mini`) |
+|---|---|---|
+| Grounded admin query responses | Yes | Yes |
+| Incident embedding support | Yes | Yes |
+| Structured output | Yes | Yes |
+| Deployment mode | Local / on-prem | Cloud API |
+| Data sovereignty | Full local control | No |
+| Open weights | Yes | No |
+| Infra ownership | Full self-managed runtime | Managed API |
+| Benchmark throughput in this packet | 0.057 req/s | 0.148 req/s |
+| Benchmark P50 latency in this packet | 13,232 ms | 2,242 ms |
 
 ---
 
