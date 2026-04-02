@@ -131,8 +131,9 @@ Before running OmniRoute, make sure you have:
 
 - **Docker** and **Docker Compose**
 - **Make** for the provided helper commands
-- An **OpenAI API key** or another **OpenAI-compatible provider** for chat
-  and embeddings
+- An **enterprise inference endpoint** or another **OpenAI-compatible provider**
+  for chat
+- An embedding provider for incident narrative embeddings
 
 You need both LLM and embedding configuration for the AI workflow to work
 correctly.
@@ -173,26 +174,14 @@ If you are using the standard Docker Compose setup, you usually only need to
 provide the LLM and embedding values from your side. The default database URL
 in `.env.example` already matches the Docker setup.
 
-Required values to fill in:
 
-```bash
-LLM_API_KEY=your_openai_api_key_here
-EMBEDDING_API_KEY=your_openai_api_key_here
-```
 
-What you must provide from your side:
-
-- `LLM_API_KEY`
-- `EMBEDDING_API_KEY`
-
-If you are using OpenAI for both, you can use the same key value for both
-fields.
-
-If you are not using OpenAI, update these as well:
+If you are using a non-default provider setup, update these values as needed:
 
 - `LLM_PROVIDER`
 - `LLM_BASE_URL`
 - `LLM_MODEL`
+- `LLM_API_KEY`
 - `EMBEDDING_PROVIDER`
 - `EMBEDDING_BASE_URL`
 - `EMBEDDING_MODEL`
@@ -518,7 +507,7 @@ If OmniRoute runs directly on your host:
 LLM_PROVIDER=openai_compatible
 LLM_API_KEY=ollama
 LLM_BASE_URL=http://localhost:11434/v1
-LLM_MODEL=qwen3:4b
+LLM_MODEL=Qwen/Qwen3-4B-Instruct-2507
 ```
 
 If OmniRoute runs with Docker Compose and Ollama runs on your host machine:
@@ -527,7 +516,7 @@ If OmniRoute runs with Docker Compose and Ollama runs on your host machine:
 LLM_PROVIDER=openai_compatible
 LLM_API_KEY=ollama
 LLM_BASE_URL=http://host.docker.internal:11434/v1
-LLM_MODEL=qwen3:4b
+LLM_MODEL=Qwen/Qwen3-4B-Instruct-2507
 ```
 
 Basic setup:
@@ -537,7 +526,7 @@ Basic setup:
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull a model
-ollama pull qwen3:4b
+ollama pull Qwen/Qwen3-4B-Instruct-2507
 
 # Verify Ollama is running
 curl http://localhost:11434/api/tags
@@ -627,17 +616,20 @@ docker compose up -d
 
 The table below compares OmniRoute inference performance across local and cloud deployments using the standardized admin query benchmark flow averaged over 3 runs.
 
-| Provider | Model | Embedding Model | Deployment | Context Window | Avg Input Tokens | Avg Output Tokens | Avg Tokens / Request | P50 Latency (ms) | P95 Latency (ms) | Throughput (req/s) |
+| Provider | Model | Deployment | Context Window | Avg Input Tokens | Avg Output Tokens | Avg Tokens / Request | P50 Latency (ms) | P95 Latency (ms) | Throughput (req/s) | Hardware Profile |
 |---|---|---|---|---|---|---|---|---|---|---|
-| vLLM | `Qwen/Qwen3-4B-Instruct-2507` | `BAAI/bge-base-en-v1.5` | Local | 32,768 | 740 | 78 | 818 | 13,232 | 56,221 | 0.057 |
-| Cloud LLM | `gpt-4o-mini` | `text-embedding-3-small` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 |
+| vLLM | `Qwen/Qwen3-4B-Instruct-2507` | Local | 32,768 | 740 | 78 | 818 | 13,232 | 56,221 | 0.057 | Apple Silicon Metal (MacBook Pro M4) |
+| OPEA EI/ SLM | `Qwen/Qwen3-4B-Instruct-2507` | CPU (Xeon) | 8.1k | 1,104 | 55 | 1,159 | 6,441 | 6,648 | 0.121 | CPU only |
+| Cloud LLM | `gpt-4o-mini` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 | Cloud GPUs |
 
 > Notes:
 >
-> - These figures summarize the OmniRoute admin query benchmark flow across 3 benchmark queries.
-> - The local vLLM row reflects a self-hosted LLM plus local embedding model.
-> - The cloud row reflects `gpt-4o-mini` for query generation and `text-embedding-3-small` for incident embeddings.
-> - Token counts and latency can vary slightly across runs depending on prompt expansion, data state, and model behavior.
+> - All benchmarks use the same OmniRoute admin query benchmark flow across 3 benchmark queries. Token counts and latency may vary slightly per run due to prompt expansion, live data state, and non-deterministic model output.
+> - Local vLLM on Apple Silicon uses Metal (MPS) acceleration for the LLM path on a MacBook Pro M4.
+> - OPEA EI/ SLM runs on Intel Xeon CPUs without GPU acceleration.
+> - The benchmark context window is configured per deployment: local vLLM at 32,768 tokens, OPEA EI/ SLM at 8.1k tokens, and the cloud API path at 128,000 tokens.
+> - Each benchmark run exercises the OmniRoute grounded admin query pipeline, including planner routing, specialist execution, grounded retrieval, and final response synthesis.
+> - Langfuse tracing is used for end-to-end observability of each benchmark run.
 
 ### Model Capabilities
 

@@ -33,7 +33,7 @@ git --version
 New to contributing?
 
 1. Open an issue or pick an existing one to work on.
-2. Fork the repo and create a branch from `develop`.
+2. Fork the repo and create a branch from `main`.
 3. Follow the local setup guide below.
 4. Run the app locally and verify your change before opening a PR.
 
@@ -94,11 +94,11 @@ This lets you pull in the latest changes from the original repo.
 
 #### Step 4: Create a branch
 
-Always branch off `develop`. See [Branching model](#branching-model) for naming conventions.
+Always branch off `main`. See [Branching model](#branching-model) for naming conventions.
 
 ```bash
-git checkout develop
-git pull upstream develop
+git checkout main
+git pull upstream main
 git checkout -b <type>/<short-description>
 ```
 
@@ -175,11 +175,11 @@ If the exact entrypoints differ in your local branch, follow the current repo sc
 ### Start contributing code?
 
 1. Open or choose an issue.
-2. [Fork the repo](#fork-and-clone-the-repo) and create a feature branch from `develop`.
+2. [Fork the repo](#fork-and-clone-the-repo) and create a feature branch from `main`.
 3. Keep the change focused on a single problem.
 4. Run the app locally and verify the affected workflow.
 5. Update docs when behavior, setup, configuration, or architecture changes.
-6. Open a pull request back to upstream `develop`.
+6. Open a pull request back to upstream `dev/omniroute`.
 
 ### Improve the documentation?
 
@@ -195,7 +195,7 @@ Documentation updates are welcome. Relevant files currently live in:
 
 1. Push your branch to your fork.
 2. Go to the OmniRoute repository and click **Compare & pull request**.
-3. Set the base branch to `develop`.
+3. Set the base branch to `dev/omniroute`.
 4. Fill in the PR template if one is provided.
 5. Submit the pull request.
 
@@ -205,7 +205,7 @@ Before opening your PR, sync with upstream to avoid merge conflicts:
 
 ```bash
 git fetch upstream
-git rebase upstream/develop
+git rebase upstream/main
 ```
 
 Follow the checklist below and the [Pull request checklist](#pull-request-checklist) section.
@@ -214,8 +214,8 @@ Follow the checklist below and the [Pull request checklist](#pull-request-checkl
 
 ## Branching model
 
-- Fork the repo and base new work from `develop`.
-- Open pull requests against upstream `develop`.
+- Fork the repo and base new work from `main`.
+- Open pull requests against upstream `dev/omniroute`.
 - Use descriptive branch names with a type prefix:
 
 | Prefix | Use |
@@ -280,7 +280,7 @@ Before submitting your pull request, confirm the following:
 - You kept the pull request scoped to one issue or topic.
 - You added screenshots for UI changes when relevant.
 - You did not commit secrets or local generated data.
-- You are opening the pull request against `develop`.
+- You are opening the pull request against `dev/omniroute`.
 
 If one or more of these are missing, the pull request may be sent back for changes before review.
 
