@@ -620,7 +620,7 @@ The table below compares OmniRoute inference performance across local and cloud 
 |---|---|---|---|---|---|---|---|---|---|---|
 | vLLM | `Qwen/Qwen3-4B-Instruct-2507` | Local | 32,768 | 740 | 78 | 818 | 13,232 | 56,221 | 0.057 | Apple Silicon Metal (MacBook Pro M4) |
 | OPEA EI/ SLM | `Qwen/Qwen3-4B-Instruct-2507` | CPU (Xeon) | 8.1k | 1,104 | 55 | 1,159 | 6,441 | 6,648 | 0.121 | CPU only |
-| Cloud LLM | `openai-4o-mini` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 | Cloud GPUs |
+| Cloud LLM | `gpt-4o-mini` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 | Cloud GPUs |
 
 > Notes:
 >
@@ -657,13 +657,13 @@ This local stack pairs an instruction-tuned Qwen language model with an English 
 | Deployment | Local via vLLM |
 | Benchmark Context Window | 32,768 |
 
-#### openai-4o-mini + text-embedding-3-small
+#### GPT-4o-mini + text-embedding-3-small
 
 This cloud configuration is suitable when you want lower latency and managed API infrastructure while keeping the existing OmniRoute benchmark flow unchanged.
 
 | Attribute | Details |
 |---|---|
-| Model | `openai-4o-mini` |
+| Model | `gpt-4o-mini` |
 | Embedding Model | `text-embedding-3-small` |
 | Deployment | Cloud API |
 | Benchmark Context Window | 128,000 |
@@ -674,7 +674,7 @@ This cloud configuration is suitable when you want lower latency and managed API
 
 ### Comparison Summary
 
-| OmniRoute Capability | Local vLLM (`Qwen/Qwen3-4B-Instruct-2507`) | Cloud API (`openai-4o-mini`) |
+| OmniRoute Capability | Local vLLM (`Qwen/Qwen3-4B-Instruct-2507`) | Cloud API (`gpt-4o-mini`) |
 |---|---|---|
 | Grounded admin query responses | Yes | Yes |
 | Incident embedding support | Yes | Yes |
