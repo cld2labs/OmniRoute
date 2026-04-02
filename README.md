@@ -136,9 +136,7 @@ Before running OmniRoute, make sure you have:
 - An embedding provider for incident narrative embeddings
 
 You need both LLM and embedding configuration for the AI workflow to work
-correctly. For enterprise inference, OmniRoute now supports the same
-`INFERENCE_API_ENDPOINT` and `INFERENCE_API_TOKEN` pattern used by
-`docugen-microagents`.
+correctly.
 
 #### Verify Installation
 
@@ -176,27 +174,9 @@ If you are using the standard Docker Compose setup, you usually only need to
 provide the LLM and embedding values from your side. The default database URL
 in `.env.example` already matches the Docker setup.
 
-Required values to fill in for enterprise inference:
 
-```bash
-INFERENCE_API_ENDPOINT=https://your-enterprise-endpoint.example.com
-INFERENCE_API_TOKEN=your-enterprise-token
-LLM_MODEL=Qwen/Qwen3-4B-Instruct-2507
-EMBEDDING_API_KEY=your_openai_api_key_here
-```
 
-What you must provide from your side:
-
-- `INFERENCE_API_ENDPOINT`
-- `INFERENCE_API_TOKEN`
-- `LLM_MODEL`
-- `EMBEDDING_API_KEY`
-
-If your embeddings stay on OpenAI or another existing embedding provider, you do
-not need to change the embedding flow yet.
-
-If you are not using the enterprise inference vars and want to keep direct LLM
-configuration, update these instead:
+If you are using a non-default provider setup, update these values as needed:
 
 - `LLM_PROVIDER`
 - `LLM_BASE_URL`
@@ -527,7 +507,7 @@ If OmniRoute runs directly on your host:
 LLM_PROVIDER=openai_compatible
 LLM_API_KEY=ollama
 LLM_BASE_URL=http://localhost:11434/v1
-LLM_MODEL=qwen3:4b
+LLM_MODEL=Qwen/Qwen3-4B-Instruct-2507
 ```
 
 If OmniRoute runs with Docker Compose and Ollama runs on your host machine:
@@ -536,7 +516,7 @@ If OmniRoute runs with Docker Compose and Ollama runs on your host machine:
 LLM_PROVIDER=openai_compatible
 LLM_API_KEY=ollama
 LLM_BASE_URL=http://host.docker.internal:11434/v1
-LLM_MODEL=qwen3:4b
+LLM_MODEL=Qwen/Qwen3-4B-Instruct-2507
 ```
 
 Basic setup:
@@ -546,7 +526,7 @@ Basic setup:
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull a model
-ollama pull qwen3:4b
+ollama pull Qwen/Qwen3-4B-Instruct-2507
 
 # Verify Ollama is running
 curl http://localhost:11434/api/tags
@@ -640,7 +620,7 @@ The table below compares OmniRoute inference performance across local and cloud 
 |---|---|---|---|---|---|---|---|---|---|---|
 | vLLM | `Qwen/Qwen3-4B-Instruct-2507` | Local | 32,768 | 740 | 78 | 818 | 13,232 | 56,221 | 0.057 | Apple Silicon Metal (MacBook Pro M4) |
 | OPEA EI/ SLM | `Qwen/Qwen3-4B-Instruct-2507` | CPU (Xeon) | 8.1k | 1,104 | 55 | 1,159 | 6,441 | 6,648 | 0.121 | CPU only |
-| Cloud LLM | `gpt-4o-mini` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 | Cloud GPUs |
+| Cloud LLM | `openai-4o-mini` | API (Cloud) | 128,000 | 1,098 | 201 | 1,300 | 2,242 | 3,714 | 0.148 | Cloud GPUs |
 
 > Notes:
 >
@@ -677,13 +657,13 @@ This local stack pairs an instruction-tuned Qwen language model with an English 
 | Deployment | Local via vLLM |
 | Benchmark Context Window | 32,768 |
 
-#### GPT-4o-mini + text-embedding-3-small
+#### openai-4o-mini + text-embedding-3-small
 
 This cloud configuration is suitable when you want lower latency and managed API infrastructure while keeping the existing OmniRoute benchmark flow unchanged.
 
 | Attribute | Details |
 |---|---|
-| Model | `gpt-4o-mini` |
+| Model | `openai-4o-mini` |
 | Embedding Model | `text-embedding-3-small` |
 | Deployment | Cloud API |
 | Benchmark Context Window | 128,000 |
@@ -694,7 +674,7 @@ This cloud configuration is suitable when you want lower latency and managed API
 
 ### Comparison Summary
 
-| OmniRoute Capability | Local vLLM (`Qwen/Qwen3-4B-Instruct-2507`) | Cloud API (`gpt-4o-mini`) |
+| OmniRoute Capability | Local vLLM (`Qwen/Qwen3-4B-Instruct-2507`) | Cloud API (`openai-4o-mini`) |
 |---|---|---|
 | Grounded admin query responses | Yes | Yes |
 | Incident embedding support | Yes | Yes |
