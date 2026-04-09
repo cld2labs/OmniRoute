@@ -612,7 +612,7 @@ docker compose up -d
 | `LLM_MAX_CONTEXT_TOKENS` | Context window used for LLM benchmark summaries | `128000` |
 | `EMBEDDING_MAX_CONTEXT_TOKENS` | Context window used for embedding benchmark summaries | `8191` |
 
-### Inference Benchmarks
+### Inference Metrics
 
 The table below compares OmniRoute inference performance across local and cloud deployments using the standardized admin query benchmark flow averaged over 3 runs.
 
@@ -624,7 +624,7 @@ The table below compares OmniRoute inference performance across local and cloud 
 
 > Notes:
 >
-> - All benchmarks use the same OmniRoute admin query benchmark flow across 3 benchmark queries. Token counts and latency may vary slightly per run due to prompt expansion, live data state, and non-deterministic model output.
+> - All metrics use the same OmniRoute admin query benchmark flow across 3 benchmark queries. Token counts and latency may vary slightly per run due to prompt expansion, live data state, and non-deterministic model output.
 > - Local vLLM on Apple Silicon uses Metal (MPS) acceleration for the LLM path on a MacBook Pro M4.
 > - OPEA EI/ SLM runs on Intel Xeon CPUs without GPU acceleration.
 > - The benchmark context window is configured per deployment: local vLLM at 32,768 tokens, OPEA EI/ SLM at 8.1k tokens, and the cloud API path at 128,000 tokens.
